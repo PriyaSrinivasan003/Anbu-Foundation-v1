@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Heart, Search, ChevronDown, ArrowRight } from 'lucide-react';
+import { Menu, X, Search, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar: React.FC = () => {
@@ -175,10 +175,10 @@ export const Navbar: React.FC = () => {
             aria-label="ANBU Foundation Home"
           >
             <img
-              src="/images/logo.png"
+              src={isHomePage && !isScrolled ? "/images/logo-white.png" : "/images/logo.png"}
               alt="ANBU Foundation"
               style={{
-                height: '46px',
+                height: '52px',
                 width: 'auto',
                 objectFit: 'contain'
               }}
@@ -449,7 +449,7 @@ export const Navbar: React.FC = () => {
             </NavLink>
           </nav>
 
-          {/* Right: Search Icon + Orange "♥ Donate Now" Button */}
+          {/* Right: Search Icon */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             {/* Search Trigger Icon Button */}
             <button
@@ -474,32 +474,6 @@ export const Navbar: React.FC = () => {
             >
               <Search size={19} />
             </button>
-
-            {/* "♥ Donate Now" Vibrant Orange Pill Button (as in screenshot) */}
-            <Link
-              to="/donate"
-              className="navbar-donate-now-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                backgroundColor: 'var(--color-sunset-orange)',
-                background: 'linear-gradient(135deg, #F45A24 0%, #EA580C 100%)',
-                color: '#FFFFFF',
-                borderRadius: '9999px',
-                padding: '0.62rem 1.45rem',
-                fontWeight: 700,
-                fontSize: '0.94rem',
-                letterSpacing: '0.01em',
-                boxShadow: '0 4px 16px rgba(244, 90, 36, 0.38)',
-                textDecoration: 'none',
-                transition: 'all 0.25s ease',
-                whiteSpace: 'nowrap'
-              }}
-            >
-              <Heart size={16} fill="#FFFFFF" color="#FFFFFF" />
-              <span>Donate Now</span>
-            </Link>
 
             {/* Mobile Hamburger Menu Toggle */}
             <button
@@ -853,24 +827,9 @@ export const Navbar: React.FC = () => {
 
               <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <Link
-                  to="/donate"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="btn btn-primary"
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    borderRadius: '9999px',
-                    backgroundColor: 'var(--color-sunset-orange)'
-                  }}
-                >
-                  <Heart size={16} fill="#FFFFFF" />
-                  <span>Donate Now</span>
-                </Link>
-
-                <Link
                   to="/volunteer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn btn-secondary"
+                  className="btn btn-primary"
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
                   <span>Volunteer Registration</span>

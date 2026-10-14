@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Send, CheckCircle2, ShieldCheck, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { Send, CheckCircle2, ShieldCheck, Mail, MapPin } from 'lucide-react';
 import { SocialMediaLinks } from '../shared/SocialMediaLinks';
 
 export const Footer: React.FC = () => {
@@ -56,15 +56,15 @@ export const Footer: React.FC = () => {
                   display: 'inline-flex', 
                   alignItems: 'center', 
                   backgroundColor: '#FFFFFF', 
-                  padding: '0.4rem 0.85rem', 
-                  borderRadius: 'var(--radius-md)',
+                  padding: '0.55rem 1.15rem', 
+                  borderRadius: 'var(--radius-lg)',
                   boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)'
                 }}
               >
                 <img
                   src="/images/logo.png"
                   alt="ANBU Foundation"
-                  style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+                  style={{ height: '58px', width: 'auto', objectFit: 'contain' }}
                 />
               </div>
             </div>
@@ -73,20 +73,11 @@ export const Footer: React.FC = () => {
               Rooted in the eternal spirit of unconditional love. We unite communities to bring dignity, education, health support, and green renewal to every doorstep.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div>
-                <Link to="/donate" className="btn btn-primary btn-sm">
-                  <span>Support Our Mission</span>
-                  <ArrowUpRight size={16} />
-                </Link>
+            <div>
+              <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-golden-peach)', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                Connect With Us
               </div>
-
-              <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-golden-peach)', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  Connect With Us
-                </div>
-                <SocialMediaLinks variant="compact" />
-              </div>
+              <SocialMediaLinks variant="compact" />
             </div>
           </div>
 
