@@ -1,22 +1,114 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { SectionHeader } from '../components/shared/SectionHeader';
 import { AnimatedReveal } from '../components/shared/AnimatedReveal';
 import { ImageReveal } from '../components/shared/ImageReveal';
 import { JourneyTimeline } from '../components/home/JourneyTimeline';
 import { teamMembers } from '../data/teamData';
-import { Heart, Compass, Eye, ArrowRight, UserCheck, Sun, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Heart, Compass, Eye, ArrowRight, UserCheck, Sun, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const heroSwipeImages = [
+  {
+    url: '/images/founder_gratitude.png',
+    title: '20 Years of ANBU Foundation — Founder Gratitude',
+    subtitle: 'Managing Trustee expressing heartfelt gratitude for 20 years of unconditional love',
+    position: 'center 20%'
+  },
+  {
+    url: '/images/anbu_scholarship_hero.png',
+    title: '10,000+ First-Generation Scholars Conferred',
+    subtitle: 'Historic assembly of scholarship recipients at Sathyabama University',
+    position: 'center 40%'
+  },
+  {
+    url: '/images/gallery_scholars_celebration.png',
+    title: 'Empowering Women in Higher Education',
+    subtitle: 'Celebratory milestone moments with collegiate women scholars',
+    position: 'center 22%'
+  },
+  {
+    url: '/images/scholars_auditorium.png',
+    title: 'Annual Higher Education Convention',
+    subtitle: 'Packed auditorium of aspiring scholars and foundation leadership',
+    position: 'center 35%'
+  }
+];
 
 export const OurStoryPage: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
   useEffect(() => {
     document.title = 'About ANBU Foundation — Inception & Guiding Principles';
   }, []);
 
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % heroSwipeImages.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + heroSwipeImages.length) % heroSwipeImages.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    if (diff > 45) {
+      nextSlide();
+    } else if (diff < -45) {
+      prevSlide();
+    }
+    setTouchStart(null);
+  };
+
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 1.05
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        x: { type: 'spring' as const, stiffness: 280, damping: 32 },
+        opacity: { duration: 0.65 }
+      }
+    },
+    exit: (dir: number) => ({
+      x: dir < 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 1.05,
+      transition: {
+        x: { type: 'spring' as const, stiffness: 280, damping: 32 },
+        opacity: { duration: 0.65 }
+      }
+    })
+  };
+
   return (
     <main style={{ backgroundColor: 'var(--bg-primary)' }}>
-      {/* Grand Editorial Story Hero */}
+      {/* Grand Editorial Story Hero with Swiping Photo Backgrounds */}
       <section 
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         style={{ 
           position: 'relative', 
           backgroundColor: '#1E0E08',
@@ -26,32 +118,142 @@ export const OurStoryPage: React.FC = () => {
           overflow: 'hidden' 
         }}
       >
-        {/* Ambient Warm Golden Radial Glows & Subtle Star Grid */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '100%',
-            maxWidth: '1200px',
-            height: '100%',
-            background: 'radial-gradient(circle at 50% 20%, rgba(244, 90, 36, 0.3) 0%, rgba(255, 152, 97, 0.09) 45%, transparent 70%)',
-            pointerEvents: 'none',
-            zIndex: 0
-          }}
-        />
+        {/* Swiping Background Slides with Smooth Crossfade & Spring Slide */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: 'radial-gradient(rgba(255, 208, 155, 0.08) 1.5px, transparent 1.5px)',
-            backgroundSize: '32px 32px',
-            opacity: 0.5,
-            pointerEvents: 'none',
-            zIndex: 0
+            zIndex: 0,
+            overflow: 'hidden'
           }}
-        />
+        >
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={currentSlide}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              style={{
+                position: 'absolute',
+                top: '-10%',
+                left: '-10%',
+                width: '120%',
+                height: '120%',
+                backgroundImage: `url(${heroSwipeImages[currentSlide].url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: heroSwipeImages[currentSlide].position,
+                filter: 'brightness(0.48) contrast(1.15) saturate(1.18)',
+                willChange: 'transform, opacity'
+              }}
+              className="scholarship-hero-bg-animated"
+            />
+          </AnimatePresence>
+
+          {/* Cinematic Gradient Overlays for Readability & Sunset Ambiance */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, rgba(30, 14, 8, 0.75) 0%, rgba(30, 14, 8, 0.55) 45%, rgba(30, 14, 8, 0.94) 100%)',
+              pointerEvents: 'none',
+              zIndex: 1
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(90deg, rgba(30, 14, 8, 0.72) 0%, rgba(30, 14, 8, 0.3) 50%, rgba(30, 14, 8, 0.72) 100%)',
+              pointerEvents: 'none',
+              zIndex: 1
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'radial-gradient(ellipse at 50% 30%, rgba(244, 90, 36, 0.25) 0%, transparent 65%)',
+              pointerEvents: 'none',
+              zIndex: 1
+            }}
+          />
+        </div>
+
+        {/* Swipe Left Arrow */}
+        <button
+          type="button"
+          onClick={prevSlide}
+          aria-label="Previous background photo"
+          style={{
+            position: 'absolute',
+            left: 'clamp(0.5rem, 2vw, 1.75rem)',
+            top: '45%',
+            transform: 'translateY(-50%)',
+            zIndex: 4,
+            width: '44px',
+            height: '44px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(43, 22, 15, 0.65)',
+            border: '1.5px solid rgba(255, 208, 155, 0.35)',
+            backdropFilter: 'blur(10px)',
+            color: '#FFFFFF',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.25s ease',
+            boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-sunset-orange)';
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(43, 22, 15, 0.65)';
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          }}
+        >
+          <ChevronLeft size={24} />
+        </button>
+
+        {/* Swipe Right Arrow */}
+        <button
+          type="button"
+          onClick={nextSlide}
+          aria-label="Next background photo"
+          style={{
+            position: 'absolute',
+            right: 'clamp(0.5rem, 2vw, 1.75rem)',
+            top: '45%',
+            transform: 'translateY(-50%)',
+            zIndex: 4,
+            width: '44px',
+            height: '44px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(43, 22, 15, 0.65)',
+            border: '1.5px solid rgba(255, 208, 155, 0.35)',
+            backdropFilter: 'blur(10px)',
+            color: '#FFFFFF',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.25s ease',
+            boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-sunset-orange)';
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(43, 22, 15, 0.65)';
+            e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+          }}
+        >
+          <ChevronRight size={24} />
+        </button>
 
         <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
           {/* Top Pill Badge with Spring Entrance */}
@@ -248,6 +450,76 @@ export const OurStoryPage: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Swiper Pagination Indicator Pills & Photo Caption Tag */}
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '0.85rem',
+              marginTop: '3rem'
+            }}
+          >
+            {/* Slide Caption Pill */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  backgroundColor: 'rgba(43, 22, 15, 0.72)',
+                  border: '1px solid rgba(255, 208, 155, 0.3)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '0.35rem 1.1rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.78rem',
+                  color: 'var(--color-sunset-cream)',
+                  fontWeight: 600,
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)'
+                }}
+              >
+                <span style={{ color: 'var(--color-golden-peach)' }}>Photo {currentSlide + 1} of {heroSwipeImages.length}:</span>
+                <span>{heroSwipeImages[currentSlide].title}</span>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Indicator Pills */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+              {heroSwipeImages.map((img, idx) => {
+                const isActive = currentSlide === idx;
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => {
+                      setDirection(idx > currentSlide ? 1 : -1);
+                      setCurrentSlide(idx);
+                    }}
+                    aria-label={`Jump to background slide ${idx + 1}: ${img.title}`}
+                    style={{
+                      height: '8px',
+                      width: isActive ? '34px' : '10px',
+                      borderRadius: '4px',
+                      backgroundColor: isActive ? 'var(--color-sunset-orange)' : 'rgba(255, 255, 255, 0.35)',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                      boxShadow: isActive ? '0 0 12px rgba(244, 90, 36, 0.75)' : 'none'
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

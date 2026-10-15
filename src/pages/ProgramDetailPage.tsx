@@ -5,7 +5,6 @@ import {
   CheckCircle, 
   Target, 
   Activity, 
-  Heart, 
   Sparkles, 
   ArrowRight,
   Quote,
@@ -58,6 +57,9 @@ export const ProgramDetailPage: React.FC = () => {
   };
 
   const videoList = program.videoUrls || (program.videoUrl ? [program.videoUrl] : []);
+  const isScholarshipPage = program.slug === 'anbu-scholarship' || slug === 'anbu-scholarship' || slug === 'anbu-higher-education-scholarships';
+  const isJoyOfGivingPage = program.slug === 'joy-of-giving' || slug === 'joy-of-giving' || slug === 'caring-hands-mobile-health';
+  const isSchoolSupportingPage = program.slug === 'school-supporting-programs' || slug === 'school-supporting-programs' || slug === 'green-roots-community-canopy';
 
   return (
     <main style={{ backgroundColor: 'var(--bg-primary)' }}>
@@ -72,32 +74,190 @@ export const ProgramDetailPage: React.FC = () => {
           overflow: 'hidden'
         }}
       >
-        {/* Ambient Warm Golden Radial Glows & Starlight Mesh */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '100%',
-            maxWidth: '1280px',
-            height: '100%',
-            background: 'radial-gradient(circle at 50% 15%, rgba(244, 90, 36, 0.35) 0%, rgba(255, 152, 97, 0.1) 50%, transparent 75%)',
-            pointerEvents: 'none',
-            zIndex: 0
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: 'radial-gradient(rgba(255, 208, 155, 0.08) 1.5px, transparent 1.5px)',
-            backgroundSize: '36px 36px',
-            opacity: 0.45,
-            pointerEvents: 'none',
-            zIndex: 0
-          }}
-        />
+        {/* Dynamic Background: Animated Moving Background for School Supporting, Joy of Giving, Scholarship, or Glow Mesh for others */}
+        {isSchoolSupportingPage ? (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 0,
+              overflow: 'hidden'
+            }}
+          >
+            {/* Moving Photo Background with Ken Burns Pan & Zoom */}
+            <div
+              className="scholarship-hero-bg-animated"
+              style={{
+                position: 'absolute',
+                top: '-12%',
+                left: '-12%',
+                width: '124%',
+                height: '124%',
+                backgroundImage: 'url(/images/school_supporting_hero.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 40%',
+                filter: 'brightness(0.50) contrast(1.15) saturate(1.15)',
+                willChange: 'transform'
+              }}
+            />
+            {/* Deep Warm Golden-Sunset Vignette & Gradient Overlays ensuring crisp contrast & accessibility */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(30, 14, 8, 0.72) 0%, rgba(30, 14, 8, 0.52) 40%, rgba(30, 14, 8, 0.94) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(90deg, rgba(30, 14, 8, 0.72) 0%, rgba(30, 14, 8, 0.32) 50%, rgba(30, 14, 8, 0.68) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'radial-gradient(ellipse at 70% 30%, rgba(244, 90, 36, 0.26) 0%, transparent 65%)',
+                pointerEvents: 'none'
+              }}
+            />
+          </div>
+        ) : isJoyOfGivingPage ? (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 0,
+              overflow: 'hidden'
+            }}
+          >
+            {/* Moving Photo Background with Ken Burns Pan & Zoom */}
+            <div
+              className="scholarship-hero-bg-animated"
+              style={{
+                position: 'absolute',
+                top: '-12%',
+                left: '-12%',
+                width: '124%',
+                height: '124%',
+                backgroundImage: 'url(/images/joy_of_giving_hero.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 45%',
+                filter: 'brightness(0.54) contrast(1.12) saturate(1.15)',
+                willChange: 'transform'
+              }}
+            />
+            {/* Deep Warm Golden-Sunset Vignette & Gradient Overlays ensuring crisp contrast & accessibility */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(30, 14, 8, 0.7) 0%, rgba(30, 14, 8, 0.5) 40%, rgba(30, 14, 8, 0.94) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(90deg, rgba(30, 14, 8, 0.72) 0%, rgba(30, 14, 8, 0.32) 50%, rgba(30, 14, 8, 0.68) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'radial-gradient(ellipse at 70% 30%, rgba(244, 90, 36, 0.26) 0%, transparent 65%)',
+                pointerEvents: 'none'
+              }}
+            />
+          </div>
+        ) : isScholarshipPage ? (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 0,
+              overflow: 'hidden'
+            }}
+          >
+            {/* Moving Photo Background with Ken Burns Pan & Zoom */}
+            <div
+              className="scholarship-hero-bg-animated"
+              style={{
+                position: 'absolute',
+                top: '-12%',
+                left: '-12%',
+                width: '124%',
+                height: '124%',
+                backgroundImage: 'url(/images/anbu_scholarship_hero.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 38%',
+                filter: 'brightness(0.5) contrast(1.15) saturate(1.12)',
+                willChange: 'transform'
+              }}
+            />
+            {/* Deep Warm Vignette & Gradient Overlays ensuring crisp contrast & accessibility */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(30, 14, 8, 0.72) 0%, rgba(30, 14, 8, 0.58) 40%, rgba(30, 14, 8, 0.94) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(90deg, rgba(30, 14, 8, 0.75) 0%, rgba(30, 14, 8, 0.35) 50%, rgba(30, 14, 8, 0.7) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'radial-gradient(ellipse at 75% 25%, rgba(244, 90, 36, 0.28) 0%, transparent 65%)',
+                pointerEvents: 'none'
+              }}
+            />
+          </div>
+        ) : (
+          <>
+            {/* Ambient Warm Golden Radial Glows & Starlight Mesh */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '100%',
+                maxWidth: '1280px',
+                height: '100%',
+                background: 'radial-gradient(circle at 50% 15%, rgba(244, 90, 36, 0.35) 0%, rgba(255, 152, 97, 0.1) 50%, transparent 75%)',
+                pointerEvents: 'none',
+                zIndex: 0
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: 'radial-gradient(rgba(255, 208, 155, 0.08) 1.5px, transparent 1.5px)',
+                backgroundSize: '36px 36px',
+                opacity: 0.45,
+                pointerEvents: 'none',
+                zIndex: 0
+              }}
+            />
+          </>
+        )}
 
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           {/* Institutional Breadcrumb Bar */}
@@ -189,13 +349,6 @@ export const ProgramDetailPage: React.FC = () => {
 
             {/* Action Bar with BNR 3D Perspective Buttons */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <div style={{ perspective: '900px' }}>
-                <Link to="/donate" className="btn btn-primary btn-3d-glow" style={{ padding: '0.85rem 1.75rem', fontSize: '0.96rem' }}>
-                  <Heart size={18} fill="#FFFFFF" />
-                  <span>Support This Initiative</span>
-                </Link>
-              </div>
-              
               <div style={{ perspective: '900px' }}>
                 <Link to="/contact" className="btn btn-secondary btn-3d-glow" style={{ padding: '0.85rem 1.5rem', fontSize: '0.96rem', backgroundColor: 'rgba(255, 255, 255, 0.1)', color: '#FFFFFF', borderColor: 'rgba(255, 208, 155, 0.3)' }}>
                   <span>Inquire & Partner</span>
@@ -412,38 +565,51 @@ export const ProgramDetailPage: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div
                 style={{
-                  position: 'relative',
                   borderRadius: 'var(--radius-2xl)',
                   overflow: 'hidden',
-                  boxShadow: '0 20px 50px rgba(43, 22, 15, 0.15)',
-                  border: '2px solid rgba(244, 90, 36, 0.22)'
+                  boxShadow: '0 20px 50px rgba(43, 22, 15, 0.12)',
+                  border: '2px solid rgba(244, 90, 36, 0.22)',
+                  backgroundColor: '#FFFFFF'
                 }}
               >
-                <AnimatedImage
-                  src={program.coverImage}
-                  alt={program.title}
-                  containerStyle={{ width: '100%', height: '380px' }}
-                  style={{
-                    width: '100%',
-                    height: '380px',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
+                <div style={{ position: 'relative', width: '100%', height: '360px', overflow: 'hidden' }}>
+                  <AnimatedImage
+                    src={program.coverImage}
+                    alt={program.title}
+                    loading="eager"
+                    containerStyle={{ width: '100%', height: '360px' }}
+                    style={{
+                      width: '100%',
+                      height: '360px',
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      right: '1rem',
+                      backgroundColor: 'rgba(30, 14, 8, 0.75)',
+                      backdropFilter: 'blur(10px)',
+                      color: 'var(--color-golden-peach)',
+                      padding: '0.35rem 0.85rem',
+                      borderRadius: 'var(--radius-full)',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      border: '1px solid rgba(255, 208, 155, 0.3)'
+                    }}
+                  >
+                    {program.category}
+                  </div>
+                </div>
                 
-                {/* Official University Seal Card */}
+                {/* Official University Seal Card Docked Below Image */}
                 <div
                   style={{
-                    position: 'absolute',
-                    bottom: '1.25rem',
-                    left: '1.25rem',
-                    right: '1.25rem',
-                    backgroundColor: 'rgba(255, 251, 246, 0.95)',
-                    backdropFilter: 'blur(16px)',
-                    padding: '1.25rem',
-                    borderRadius: 'var(--radius-lg)',
-                    border: '1px solid rgba(244, 90, 36, 0.25)',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.14)'
+                    backgroundColor: 'rgba(255, 251, 246, 0.98)',
+                    padding: '1.25rem 1.5rem',
+                    borderTop: '1px solid rgba(244, 90, 36, 0.15)'
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
@@ -883,24 +1049,9 @@ export const ProgramDetailPage: React.FC = () => {
               <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', margin: '0 0 1rem 0', color: '#FFFFFF' }}>
                 Empower a Scholar, Adopt a Village, Transform a Life
               </h3>
-              <p style={{ color: 'rgba(255, 244, 229, 0.82)', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+              <p style={{ color: 'rgba(255, 244, 229, 0.82)', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: 0 }}>
                 Every contribution channels directly into student scholarships, hygienic school amenities, and sustainable rural livelihood infrastructure.
               </p>
-
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-                <div style={{ perspective: '900px' }}>
-                  <Link to="/donate" className="btn btn-primary btn-lg btn-3d-glow" style={{ padding: '0.95rem 2.25rem' }}>
-                    <Heart size={18} fill="#FFFFFF" />
-                    <span>Support This Initiative</span>
-                  </Link>
-                </div>
-                <div style={{ perspective: '900px' }}>
-                  <Link to="/volunteer" className="btn btn-secondary btn-lg btn-3d-glow" style={{ padding: '0.95rem 2rem', backgroundColor: 'rgba(255,255,255,0.1)', color: '#FFFFFF', borderColor: 'rgba(255,208,155,0.4)' }}>
-                    <span>Volunteer With Us</span>
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </div>

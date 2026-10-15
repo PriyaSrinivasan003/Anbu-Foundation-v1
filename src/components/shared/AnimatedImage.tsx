@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface AnimatedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -21,17 +21,33 @@ export const AnimatedImage: React.FC<AnimatedImageProps> = ({
   containerStyle = {},
   enableHoverZoom = false,
   style = {},
+  loading = 'lazy',
   ...props
 }) => {
+  const imgRef = useRef<HTMLImageElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [imgSrc, setImgSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src);
+    setHasError(false);
+    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
+      setIsLoaded(true);
+    } else {
+      setIsLoaded(false);
+    }
+  }, [src]);
 
   const handleError = () => {
     if (!hasError && fallbackSrc && imgSrc !== fallbackSrc) {
       setHasError(true);
       setImgSrc(fallbackSrc);
     }
+  };
+
+  const handleLoad = () => {
+    setIsLoaded(true);
   };
 
   return (
@@ -46,7 +62,7 @@ export const AnimatedImage: React.FC<AnimatedImageProps> = ({
       }}
       className={`animated-image-wrapper ${className}`}
     >
-      {/* Animated Shimmer Skeleton (active while image is loading) */}
+      {/* Animated Shimmer Skeleton (active only while image is loading) */}
       {!isLoaded && (
         <div
           aria-hidden="true"
@@ -55,18 +71,20 @@ export const AnimatedImage: React.FC<AnimatedImageProps> = ({
             position: 'absolute',
             inset: 0,
             zIndex: 1,
-            transition: 'opacity 0.4s ease'
+            pointerEvents: 'none',
+            transition: 'opacity 0.3s ease'
           }}
         />
       )}
 
       {/* Main Image with Progressive Entrance Animation */}
       <img
+        ref={imgRef}
         src={imgSrc}
         alt={alt}
-        loading="lazy"
+        loading={loading}
         decoding="async"
-        onLoad={() => setIsLoaded(true)}
+        onLoad={handleLoad}
         onError={handleError}
         className={`img-load-fade ${isLoaded ? 'is-loaded' : ''}`}
         style={{
@@ -75,8 +93,8 @@ export const AnimatedImage: React.FC<AnimatedImageProps> = ({
           objectFit: 'cover',
           display: 'block',
           transition: enableHoverZoom
-            ? 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease'
-            : 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease',
+            ? 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease'
+            : 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease',
           ...style
         }}
         {...props}

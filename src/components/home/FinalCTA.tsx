@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, HandHeart, Sparkles } from 'lucide-react';
+import { HandHeart, Sparkles } from 'lucide-react';
 import { BotanicalIllustration } from '../shared/BotanicalIllustration';
 import { AnimatedReveal } from '../shared/AnimatedReveal';
 import { AnimatedTextLetters } from '../shared/AnimatedTextLetters';
@@ -126,17 +126,6 @@ export const FinalCTA: React.FC = () => {
                   gap: '1.25rem'
                 }}
               >
-                <div style={{ perspective: '900px' }}>
-                  <Link
-                    to="/donate"
-                    className="btn btn-primary btn-lg btn-3d-glow"
-                    id="final-cta-donate-btn"
-                  >
-                    <Heart size={20} fill="#FFFFFF" />
-                    <span>Donate to ANBU Foundation</span>
-                  </Link>
-                </div>
-
                 <div style={{ perspective: '900px' }}>
                   <Link
                     to="/volunteer"

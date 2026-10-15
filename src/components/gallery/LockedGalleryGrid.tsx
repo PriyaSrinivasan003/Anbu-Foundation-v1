@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Lock, Unlock, Sparkles, Key, Eye } from 'lucide-react';
+import { Lock, Unlock, Sparkles, Key, Eye, ArrowRight } from 'lucide-react';
 import type { GalleryMediaItem } from '../../data/storiesData';
 import { LightboxModal } from '../shared/LightboxModal';
 import { AnimatedImage } from '../shared/AnimatedImage';
@@ -19,8 +19,13 @@ export const LockedGalleryGrid: React.FC<LockedGalleryGridProps> = ({
   const [isUnlocking, setIsUnlocking] = useState<boolean>(false);
   const [activeMedia, setActiveMedia] = useState<GalleryMediaItem | null>(null);
   const [shakeTrigger, setShakeTrigger] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const displayItems = items.slice(0, maxItems);
+  const filteredItems = selectedCategory === 'All'
+    ? items
+    : items.filter(item => item.category === selectedCategory);
+
+  const displayItems = maxItems ? filteredItems.slice(0, maxItems) : filteredItems;
 
   const handleUnlock = () => {
     setIsUnlocking(true);
@@ -149,6 +154,46 @@ export const LockedGalleryGrid: React.FC<LockedGalleryGridProps> = ({
         </div>
       </div>
 
+      {/* Category Filter Pills (Visible when Unlocked) */}
+      {!isLocked && (
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.6rem',
+            marginBottom: '1.75rem',
+            alignItems: 'center'
+          }}
+        >
+          {(['All', 'Education', 'Community', 'Healthcare', 'Environment'] as const).map((cat) => {
+            const count = cat === 'All' ? items.length : items.filter(i => i.category === cat).length;
+            if (cat !== 'All' && count === 0) return null;
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                style={{
+                  padding: '0.45rem 1.15rem',
+                  borderRadius: 'var(--radius-full)',
+                  border: isSelected ? '1.5px solid var(--color-sunset-orange)' : '1px solid rgba(43, 22, 15, 0.14)',
+                  backgroundColor: isSelected ? 'var(--color-sunset-orange)' : '#FFFFFF',
+                  color: isSelected ? '#FFFFFF' : 'var(--color-sunset-dark)',
+                  fontWeight: isSelected ? 700 : 500,
+                  fontSize: '0.86rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: isSelected ? '0 4px 14px rgba(244, 90, 36, 0.3)' : '0 2px 6px rgba(43, 22, 15, 0.04)'
+                }}
+              >
+                {cat} ({count})
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Photo Grid Container with Relative Locking Layer */}
       <div style={{ position: 'relative', minHeight: '400px' }}>
         {/* Responsive Gallery Grid */}
@@ -167,18 +212,8 @@ export const LockedGalleryGrid: React.FC<LockedGalleryGridProps> = ({
               key={item.id}
               initial={false}
               animate={!isLocked ? { opacity: 1, y: 0, scale: 1 } : { scale: 0.98 }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              whileHover={!isLocked ? { y: -6 } : undefined}
-              style={{
-                position: 'relative',
-                height: '280px',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                boxShadow: 'var(--shadow-warm-card)',
-                border: '1px solid var(--border-light)',
-                backgroundColor: 'var(--color-sunset-dark)'
-              }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="sathyabama-gallery-card"
               onClick={() => handleCardClick(item)}
               role="button"
               tabIndex={0}
@@ -189,92 +224,203 @@ export const LockedGalleryGrid: React.FC<LockedGalleryGridProps> = ({
               }}
               aria-label={`View ${item.title}`}
             >
-              <AnimatedImage
-                src={item.image}
-                alt={item.title}
-                darkSkeleton={true}
-                containerStyle={{ width: '100%', height: '100%' }}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center 15%',
-                  transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-                }}
-              />
+              <div className="sathyabama-card-inner">
+                {/* Front Side: Photo, Gradient, Category Pill, Sathyabama Signature Underline Accent */}
+                <div className="sathyabama-card-front">
+                  <AnimatedImage
+                    src={item.image}
+                    alt={item.title}
+                    darkSkeleton={true}
+                    containerStyle={{ width: '100%', height: '100%' }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 20%'
+                    }}
+                  />
+                  {/* Subtle Gradient Overlays */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(180deg, rgba(43, 22, 15, 0.25) 0%, rgba(43, 22, 15, 0.4) 40%, rgba(43, 22, 15, 0.92) 100%)',
+                      pointerEvents: 'none'
+                    }}
+                  />
 
-              {/* Hover overlay with caption & eye icon (always present once unlocked) */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(180deg, rgba(43, 22, 15, 0.1) 0%, rgba(43, 22, 15, 0.88) 100%)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                  padding: '1.5rem',
-                  color: 'var(--color-sunset-cream)'
-                }}
-              >
-                {!isLocked && (
+                  {/* Category Pill Tag */}
                   <div
                     style={{
                       position: 'absolute',
                       top: '1rem',
-                      right: '1rem',
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '50%',
-                      backgroundColor: 'rgba(255, 244, 229, 0.9)',
-                      color: 'var(--color-sunset-dark)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                      left: '1rem',
+                      zIndex: 2,
+                      backgroundColor: 'rgba(244, 90, 36, 0.92)',
+                      backdropFilter: 'blur(8px)',
+                      color: '#FFFFFF',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      padding: '0.3rem 0.75rem',
+                      borderRadius: 'var(--radius-full)',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.3)'
                     }}
                   >
-                    <Eye size={18} />
+                    {item.category}
                   </div>
-                )}
 
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    color: 'var(--color-golden-peach)',
-                    fontWeight: 700,
-                    marginBottom: '0.35rem'
-                  }}
-                >
-                  {item.category} • {item.date}
-                </span>
+                  {/* 3D Flip Indicator Eye Icon */}
+                  {!isLocked && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '1rem',
+                        right: '1rem',
+                        zIndex: 2,
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(255, 244, 229, 0.92)',
+                        color: 'var(--color-sunset-dark)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.25)'
+                      }}
+                      title="Hover to flip"
+                    >
+                      <Eye size={17} />
+                    </div>
+                  )}
 
-                <h3
-                  style={{
-                    color: '#FFFFFF',
-                    fontSize: '1.15rem',
-                    lineHeight: 1.25,
-                    marginBottom: '0.35rem'
-                  }}
-                >
-                  {item.title}
-                </h3>
+                  {/* Sathyabama Signature Bottom Front Title with Underline */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '1.25rem',
+                      left: '1.25rem',
+                      right: '1.25rem',
+                      zIndex: 2
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: 'block',
+                        fontSize: '0.74rem',
+                        color: 'var(--color-golden-peach)',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        marginBottom: '0.3rem'
+                      }}
+                    >
+                      {item.date}
+                    </span>
+                    <h3
+                      style={{
+                        color: '#FFFFFF',
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '1.12rem',
+                        fontWeight: 700,
+                        lineHeight: 1.3,
+                        margin: 0,
+                        paddingBottom: '0.45rem',
+                        borderBottom: '2.5px solid var(--color-sunset-orange)',
+                        display: 'inline-block',
+                        maxWidth: '100%'
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
 
-                <p
-                  style={{
-                    color: 'rgba(255, 244, 229, 0.85)',
-                    fontSize: '0.85rem',
-                    margin: 0,
-                    lineHeight: 1.4,
-                    display: '-webkit-box',
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden'
-                  }}
-                >
-                  {item.caption}
-                </p>
+                {/* Back Side: Sathyabama 3D Flip Back with Detailed Content & Explore Button */}
+                <div className="sathyabama-card-back">
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: '100%',
+                      padding: '1.75rem 1.4rem',
+                      textAlign: 'center',
+                      gap: '0.85rem'
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        fontSize: '0.74rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                        color: 'var(--color-golden-peach)',
+                        fontWeight: 700,
+                        padding: '0.25rem 0.8rem',
+                        borderRadius: 'var(--radius-full)',
+                        backgroundColor: 'rgba(244, 90, 36, 0.22)',
+                        border: '1px solid rgba(244, 90, 36, 0.45)'
+                      }}
+                    >
+                      {item.category} • {item.date}
+                    </span>
+
+                    <h3
+                      style={{
+                        color: '#FFFFFF',
+                        fontFamily: 'var(--font-serif)',
+                        fontSize: '1.2rem',
+                        fontWeight: 700,
+                        lineHeight: 1.3,
+                        margin: 0
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p
+                      style={{
+                        color: 'rgba(255, 244, 229, 0.88)',
+                        fontSize: '0.85rem',
+                        lineHeight: 1.55,
+                        margin: 0,
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      {item.caption}
+                    </p>
+
+                    {/* Sathyabama Signature "Explore" Pill */}
+                    <div style={{ marginTop: '0.4rem' }}>
+                      <span
+                        className="sathyabama-explore-btn"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          color: '#FFFFFF',
+                          fontSize: '0.88rem',
+                          fontWeight: 700,
+                          padding: '0.55rem 1.35rem',
+                          border: '1.5px solid #FFFFFF',
+                          borderRadius: 'var(--radius-full)',
+                          backgroundColor: 'rgba(244, 90, 36, 0.92)',
+                          boxShadow: '0 4px 15px rgba(244, 90, 36, 0.4)',
+                          transition: 'all 0.25s ease'
+                        }}
+                      >
+                        <span>Explore Photo</span>
+                        <ArrowRight size={15} />
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}

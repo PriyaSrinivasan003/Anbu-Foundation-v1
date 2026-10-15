@@ -147,7 +147,7 @@ export const Navbar: React.FC = () => {
             ? '0 6px 24px rgba(43, 22, 15, 0.08)'
             : 'none',
           transition: 'all 0.3s ease',
-          height: '76px',
+          height: (isHomePage && !isScrolled) ? '92px' : '76px',
           display: 'flex',
           alignItems: 'center'
         }}
@@ -178,9 +178,10 @@ export const Navbar: React.FC = () => {
               src={isHomePage && !isScrolled ? "/images/logo-white.png" : "/images/logo.png"}
               alt="ANBU Foundation"
               style={{
-                height: '52px',
+                height: (isHomePage && !isScrolled) ? 'clamp(66px, 6vw, 78px)' : '54px',
                 width: 'auto',
-                objectFit: 'contain'
+                objectFit: 'contain',
+                transition: 'all 0.3s ease'
               }}
             />
           </Link>

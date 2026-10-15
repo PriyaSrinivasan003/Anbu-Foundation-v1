@@ -1,17 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Heart, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { Heart, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { RippleHero } from '../shared/RippleHero';
 import { BotanicalIllustration } from '../shared/BotanicalIllustration';
 import { AnimatedTextLetters } from '../shared/AnimatedTextLetters';
 import { OrnamentalDivider } from '../shared/OrnamentalDivider';
 
+const heroSlides = [
+  {
+    url: '/images/sunset_hero.jpg',
+    position: 'center 38%',
+    title: 'ANBU Sunset Spirit & Community Care',
+    filter: 'brightness(0.96) saturate(1.08)'
+  },
+  {
+    url: '/images/sathyabama_campus_hero.jpg',
+    position: 'center 35%',
+    title: 'Sathyabama University Campus & Heritage',
+    filter: 'brightness(0.78) contrast(1.12) saturate(1.15)'
+  }
+];
+
 export const HeroSection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    if (diff > 45) {
+      nextSlide();
+    } else if (diff < -45) {
+      prevSlide();
+    }
+    setTouchStart(null);
+  };
+
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: shouldReduceMotion ? 0 : (dir > 0 ? '100%' : '-100%'),
+      opacity: 0,
+      scale: 1.05
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        x: { type: 'spring' as const, stiffness: 280, damping: 32 },
+        opacity: { duration: 0.65 }
+      }
+    },
+    exit: (dir: number) => ({
+      x: shouldReduceMotion ? 0 : (dir < 0 ? '100%' : '-100%'),
+      opacity: 0,
+      scale: 1.05,
+      transition: {
+        x: { type: 'spring' as const, stiffness: 280, damping: 32 },
+        opacity: { duration: 0.65 }
+      }
+    })
+  };
 
   return (
     <section 
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: 'relative',
         width: '100%',
@@ -19,13 +98,13 @@ export const HeroSection: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingTop: 'calc(76px + clamp(2rem, 4vw, 3.5rem))',
+        paddingTop: 'calc(92px + clamp(1.8rem, 3.5vw, 3rem))',
         paddingBottom: 'clamp(3.5rem, 6vw, 5.5rem)',
         overflow: 'hidden',
         backgroundColor: '#1E0E08'
       }}
     >
-      {/* Full-width Sunset Background Image with gentle zoom effect */}
+      {/* Full-width Background Image Slides with Swiping */}
       <div
         style={{
           position: 'absolute',
@@ -34,28 +113,38 @@ export const HeroSection: React.FC = () => {
           overflow: 'hidden'
         }}
       >
-        <motion.div
-          initial={{ scale: shouldReduceMotion ? 1 : 1.08, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/images/sunset_hero.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 38%',
-            filter: 'brightness(0.96) saturate(1.08)'
-          }}
-          className="hero-bg-zoom"
-        />
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={currentSlide}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            style={{
+              position: 'absolute',
+              top: '-5%',
+              left: '-5%',
+              width: '110%',
+              height: '110%',
+              backgroundImage: `url(${heroSlides[currentSlide].url})`,
+              backgroundSize: 'cover',
+              backgroundPosition: heroSlides[currentSlide].position,
+              filter: heroSlides[currentSlide].filter,
+              willChange: 'transform, opacity'
+            }}
+            className="hero-bg-zoom"
+          />
+        </AnimatePresence>
 
         {/* Gradient Overlays: Rich sunset warm dark glow at the base and subtle vignette */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, rgba(43, 22, 15, 0.32) 0%, rgba(43, 22, 15, 0.45) 45%, rgba(43, 22, 15, 0.95) 100%)',
-            pointerEvents: 'none'
+            background: 'linear-gradient(180deg, rgba(30, 14, 8, 0.42) 0%, rgba(30, 14, 8, 0.54) 45%, rgba(30, 14, 8, 0.95) 100%)',
+            pointerEvents: 'none',
+            zIndex: 1
           }}
         />
         <div
@@ -63,9 +152,141 @@ export const HeroSection: React.FC = () => {
             position: 'absolute',
             inset: 0,
             background: 'radial-gradient(ellipse at 80% 60%, rgba(244, 90, 36, 0.28) 0%, transparent 65%)',
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            zIndex: 1
           }}
         />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg, rgba(30, 14, 8, 0.6) 0%, rgba(30, 14, 8, 0.25) 50%, rgba(30, 14, 8, 0.6) 100%)',
+            pointerEvents: 'none',
+            zIndex: 1
+          }}
+        />
+      </div>
+
+      {/* Left Navigation Arrow */}
+      <button
+        type="button"
+        onClick={prevSlide}
+        aria-label="Previous hero background"
+        style={{
+          position: 'absolute',
+          left: 'clamp(0.5rem, 2vw, 1.75rem)',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 5,
+          width: '44px',
+          height: '44px',
+          borderRadius: '50%',
+          backgroundColor: 'rgba(43, 22, 15, 0.65)',
+          border: '1.5px solid rgba(255, 208, 155, 0.35)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          color: '#FFFFFF',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.25s ease',
+          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--color-sunset-orange)';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'rgba(43, 22, 15, 0.65)';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+        }}
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      {/* Right Navigation Arrow */}
+      <button
+        type="button"
+        onClick={nextSlide}
+        aria-label="Next hero background"
+        style={{
+          position: 'absolute',
+          right: 'clamp(0.5rem, 2vw, 1.75rem)',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 5,
+          width: '44px',
+          height: '44px',
+          borderRadius: '50%',
+          backgroundColor: 'rgba(43, 22, 15, 0.65)',
+          border: '1.5px solid rgba(255, 208, 155, 0.35)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          color: '#FFFFFF',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.25s ease',
+          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--color-sunset-orange)';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'rgba(43, 22, 15, 0.65)';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+        }}
+      >
+        <ChevronRight size={24} />
+      </button>
+
+      {/* Bottom Indicator Dots */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '1.5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 5,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.6rem',
+          backgroundColor: 'rgba(30, 14, 8, 0.65)',
+          padding: '0.35rem 0.85rem',
+          borderRadius: 'var(--radius-full)',
+          border: '1px solid rgba(255, 208, 155, 0.28)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)'
+        }}
+      >
+        {heroSlides.map((slide, idx) => {
+          const isActive = currentSlide === idx;
+          return (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => {
+                setDirection(idx > currentSlide ? 1 : -1);
+                setCurrentSlide(idx);
+              }}
+              aria-label={`Jump to background slide ${idx + 1}: ${slide.title}`}
+              style={{
+                height: '8px',
+                width: isActive ? '28px' : '9px',
+                borderRadius: '4px',
+                backgroundColor: isActive ? 'var(--color-sunset-orange)' : 'rgba(255, 255, 255, 0.38)',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                boxShadow: isActive ? '0 0 10px rgba(244, 90, 36, 0.8)' : 'none'
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Soft Expanding Ripple Circles */}
@@ -137,16 +358,16 @@ export const HeroSection: React.FC = () => {
             style={{
               backgroundColor: '#FFFFFF',
               borderRadius: 'var(--radius-full)',
-              padding: '2px 8px',
+              padding: '3px 10px',
               display: 'flex',
               alignItems: 'center',
-              height: '30px'
+              height: '34px'
             }}
           >
             <img
               src="/images/logo.png"
               alt="ANBU"
-              style={{ height: '24px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '28px', width: 'auto', objectFit: 'contain' }}
             />
           </div>
           <span style={{ fontSize: '0.86rem', color: 'var(--color-sunset-cream)', fontWeight: 600 }}>
@@ -264,7 +485,7 @@ export const HeroSection: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* CTA Buttons: Primary "Join Our Mission" & Secondary "Learn More" with 3D glow */}
+          {/* CTA Buttons: Primary "Learn More" & Secondary "Make a warm donation" */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -276,17 +497,6 @@ export const HeroSection: React.FC = () => {
               gap: '1rem'
             }}
           >
-            <div style={{ perspective: '900px' }}>
-              <Link
-                to="/volunteer"
-                className="btn btn-primary btn-lg btn-3d-glow"
-                id="hero-join-mission-btn"
-              >
-                <span>Join Our Mission</span>
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-
             <div style={{ perspective: '900px' }}>
               <Link
                 to="/our-story"

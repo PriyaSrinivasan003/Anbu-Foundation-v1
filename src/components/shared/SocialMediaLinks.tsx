@@ -42,7 +42,7 @@ export const socialPlatforms: SocialPlatform[] = [
   {
     name: 'YouTube',
     handle: '@anbufoundation',
-    url: 'https://youtube.com',
+    url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR01MwIw30levEfQcDQAY_NvHNEpURCG-CPyUmqMWHAHw&s=10',
     brandColor: '#FF0000',
     hoverGradient: 'linear-gradient(135deg, #FF0000 0%, #CC0000 100%)',
     description: 'Documentaries, student testimonials & annual celebration films',

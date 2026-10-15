@@ -224,7 +224,7 @@ export const StoriesPage: React.FC = () => {
 
           {/* Locked / Unlocked Gallery Grid */}
           <div style={{ marginTop: '2.5rem' }}>
-            <LockedGalleryGrid items={galleryMediaItems} maxItems={12} />
+            <LockedGalleryGrid items={galleryMediaItems} maxItems={galleryMediaItems.length} />
           </div>
         </div>
       </section>

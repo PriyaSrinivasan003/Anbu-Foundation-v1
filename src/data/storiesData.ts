@@ -86,6 +86,38 @@ export interface GalleryMediaItem {
 
 export const galleryMediaItems: GalleryMediaItem[] = [
   {
+    id: 'gal-convocation',
+    title: 'Sathyabama University Scholarship Convocation',
+    category: 'Education',
+    image: '/images/gallery_scholarship_convocation.png',
+    caption: 'Over 10,000 students conferred with full higher education scholarships on the grand stairs of Sathyabama Institute of Science and Technology.',
+    date: 'Scholarship Milestone'
+  },
+  {
+    id: 'gal-fellowship',
+    title: 'Differently-Abled Scholars & Youth Fellowship',
+    category: 'Education',
+    image: '/images/gallery_event_fellowship.png',
+    caption: 'Founder sharing an uplifting fellowship moment with collegiate scholars and wheelchair-enabled students pursuing engineering and higher studies.',
+    date: 'Inclusive Education'
+  },
+  {
+    id: 'gal-auditorium',
+    title: 'Sathyabama University Grand Auditorium Assembly',
+    category: 'Education',
+    image: '/images/gallery_auditorium_assembly.png',
+    caption: 'A packed university auditorium of students and dignitaries commemorating the milestone partnership between ANBU Foundation and Sathyabama Institute.',
+    date: 'University Assembly'
+  },
+  {
+    id: 'gal-celebration',
+    title: 'Women Scholars Stage Felicitations',
+    category: 'Education',
+    image: '/images/gallery_scholars_celebration.png',
+    caption: 'Dr. Mariazeena Johnson and executive trustees celebrating academic achievements on stage with vibrant women scholars.',
+    date: 'Women in STEM'
+  },
+  {
     id: 'gal-1',
     title: '20 Years of ANBU Foundation Celebration',
     category: 'Community',
@@ -110,6 +142,22 @@ export const galleryMediaItems: GalleryMediaItem[] = [
     date: 'Scholarship Assembly'
   },
   {
+    id: 'gal-founders-home',
+    title: 'Founders at Home of Love Headquarters',
+    category: 'Community',
+    image: '/images/gallery_founders_home_of_love.png',
+    caption: 'The founding couple whose selfless dedication and vision have nurtured thousands of underprivileged families across Tamil Nadu.',
+    date: 'Founders Heritage'
+  },
+  {
+    id: 'gal-meal',
+    title: 'Joy of Giving — Community Meal Sharing',
+    category: 'Community',
+    image: '/images/gallery_community_meal.png',
+    caption: 'Nourishing hunger with warm, freshly-prepared meals distributed directly to needy elders and street families.',
+    date: 'Nutritional Care'
+  },
+  {
     id: 'gal-4',
     title: 'Founder Gratitude & Vanakkam',
     category: 'Community',
@@ -119,7 +167,7 @@ export const galleryMediaItems: GalleryMediaItem[] = [
   },
   {
     id: 'gal-5',
-    title: '10,000+ Scholarships Conferred',
+    title: '10,000+ Scholarships Conferred Banner',
     category: 'Education',
     image: '/images/sathyabama_19th_anniversary.png',
     caption: 'Commemorating 10,000+ students benefited by the Anbu Scholarship in collaboration with Sathyabama Institute of Science and Technology.',
@@ -132,5 +180,53 @@ export const galleryMediaItems: GalleryMediaItem[] = [
     image: '/images/founders_leadership.png',
     caption: 'The founding couple and executive trustees whose tireless vision has steered ANBU Foundation through 20 years of transformative service.',
     date: 'Trustee Fellowship'
+  },
+  {
+    id: 'gal-learning-hub',
+    title: 'Bright Minds Inclusive Learning Hub',
+    category: 'Education',
+    image: '/images/learning_hub.png',
+    caption: 'After-school tutoring, digital literacy, and holistic mentorship empowering children in underserved semi-urban neighborhoods.',
+    date: 'Learning Hubs'
+  },
+  {
+    id: 'gal-rural',
+    title: 'Village Horizons Rural Empowerment',
+    category: 'Community',
+    image: '/images/rural_development.png',
+    caption: 'Community mobilization, clean drinking water initiatives, and self-help group training across rural districts.',
+    date: 'Rural Action'
+  },
+  {
+    id: 'gal-wellness',
+    title: 'Caring Hands Mobile Healthcare & Wellness',
+    category: 'Healthcare',
+    image: '/images/wellness_circle.png',
+    caption: 'Free diagnostic medical camps, geriatric screening, and preventive health outreach for vulnerable rural communities.',
+    date: 'Healthcare Outreach'
+  },
+  {
+    id: 'gal-care',
+    title: 'Grassroots Compassion & Elder Support',
+    category: 'Community',
+    image: '/images/community_care.jpg',
+    caption: 'Providing monthly ration hampers, emotional companionship, and dignified care to abandoned and destitute senior citizens.',
+    date: 'Elder Dignity'
+  },
+  {
+    id: 'gal-education',
+    title: 'Classroom & Study Kit Distribution',
+    category: 'Education',
+    image: '/images/school_supporting_hero.png',
+    caption: 'Equipping rural school students with textbooks, uniforms, and digital educational resources for a brighter future.',
+    date: 'School Support'
+  },
+  {
+    id: 'gal-environment',
+    title: 'Green Roots Community Tree Plantation',
+    category: 'Environment',
+    image: '/images/community_environment.jpg',
+    caption: 'Volunteers and youth planting native tree saplings to cultivate ecological harmony and green village corridors.',
+    date: 'Eco Renewal'
   }
 ];
