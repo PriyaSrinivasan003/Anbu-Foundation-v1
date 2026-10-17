@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HandHeart, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { BotanicalIllustration } from '../shared/BotanicalIllustration';
 import { AnimatedReveal } from '../shared/AnimatedReveal';
 import { AnimatedTextLetters } from '../shared/AnimatedTextLetters';
@@ -114,7 +114,7 @@ export const FinalCTA: React.FC = () => {
                   marginBottom: '2.5rem'
                 }}
               >
-                Whether you join us on the field, share your expertise, or make a heartfelt contribution, you are an essential part of the ANBU circle.
+                Rooted in unconditional love, we walk alongside children, elders, and grassroots communities—creating a more equitable and compassionate world.
               </p>
 
               <div
@@ -128,12 +128,21 @@ export const FinalCTA: React.FC = () => {
               >
                 <div style={{ perspective: '900px' }}>
                   <Link
-                    to="/volunteer"
-                    className="btn btn-outline-white btn-lg btn-3d-glow"
-                    id="final-cta-volunteer-btn"
+                    to="/programs"
+                    className="btn btn-primary btn-lg btn-3d-glow"
+                    id="final-cta-initiatives-btn"
                   >
-                    <HandHeart size={20} />
-                    <span>Become a Volunteer</span>
+                    <span>Explore Key Initiatives</span>
+                  </Link>
+                </div>
+
+                <div style={{ perspective: '900px' }}>
+                  <Link
+                    to="/contact"
+                    className="btn btn-outline-white btn-lg btn-3d-glow"
+                    id="final-cta-contact-btn"
+                  >
+                    <span>Contact Our Office</span>
                   </Link>
                 </div>
               </div>

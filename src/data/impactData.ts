@@ -21,18 +21,18 @@ export const impactMetrics: ImpactMetric[] = [
   },
   {
     id: 'metric-3',
-    targetNumber: 1500,
+    targetNumber: 250,
     suffix: '+',
-    label: 'Active Volunteer Network',
-    description: 'Passionate educators, healthcare professionals, and youth volunteers across chapters.',
+    label: 'Schools & Communities Supported',
+    description: 'Government schools, village learning centers, and partner campuses positively impacted.',
     category: 'Community'
   },
   {
     id: 'metric-4',
-    targetNumber: 96,
+    targetNumber: 100,
     suffix: '%',
-    label: 'Direct Program Allocation',
-    description: 'Directing contributions straight to tuition subsidies, books, health camps, and student kits.',
+    label: 'Institutional Commitment',
+    description: 'Fully sponsored and endowed through our partner university to uplift grassroots students.',
     category: 'Community'
   }
 ];

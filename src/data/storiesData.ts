@@ -9,7 +9,7 @@ export const storiesData: Story[] = [
     excerpt: 'Marking two decades of transformative grassroots empowerment, scholarships for 10,000+ youths, and compassionate community service across Tamil Nadu.',
     fullContent: [
       'Two decades ago, ANBU Foundation began with a humble yet uncompromising mission: to turn unconditional love (அன்பு) into measurable, dignified action. From individual tuition support to comprehensive university scholarships, our work has touched over 10,000 young scholars.',
-      'At our 20th Anniversary gathering, thousands of alumni—now software engineers, teachers, doctors, and civic leaders—reunited with the founders and volunteers who believed in them when resources were scarce.',
+      'At our 20th Anniversary gathering, thousands of alumni—now software engineers, teachers, doctors, and civic leaders—reunited with the founders and mentors who believed in them when resources were scarce.',
       '“Seeing these young women and men rise into independent pillars of society is the greatest reward we could ever imagine,” shared the Managing Trustee amidst thunderous applause and tears of gratitude.'
     ],
     author: 'ANBU Editorial Board',
@@ -62,8 +62,8 @@ export const storiesData: Story[] = [
     quote: 'Thank you all for your love. Every life touched is a blessing made possible by your unwavering faith.',
     excerpt: 'A heartfelt reflection from our Managing Trustee on the journey from grassroots outreach to a state-wide movement of compassion.',
     fullContent: [
-      'Looking across an auditorium filled with bright young faces and devoted volunteers, our Managing Trustee folded her hands in a traditional vanakkam of deep gratitude.',
-      '“Twenty years ago, we began with a single wish: that no deserving child should lose their chance at an education, and no elderly neighbor should feel forgotten. Whatever we have achieved belongs to every volunteer who gave their weekends, every partner who gave their trust, and every student who worked through the night to make their family proud.”',
+      'Looking across an auditorium filled with bright young faces and devoted educators, our Managing Trustee folded her hands in a traditional vanakkam of deep gratitude.',
+      '“Twenty years ago, we began with a single wish: that no deserving child should lose their chance at an education, and no elderly neighbor should feel forgotten. Whatever we have achieved belongs to every supporter who gave their dedication, every partner who gave their trust, and every student who worked through the night to make their family proud.”',
       'The foundation looks forward to the next decade with renewed vigor, expanding digital literacy pods and community healthcare access across the region.'
     ],
     author: 'Office of the Managing Trustee',
@@ -122,7 +122,7 @@ export const galleryMediaItems: GalleryMediaItem[] = [
     title: '20 Years of ANBU Foundation Celebration',
     category: 'Community',
     image: '/images/anbu_20_years_celebration.png',
-    caption: 'A historic assembly of thousands of students, volunteers, and trustees celebrating 20 years of unconditional love and service.',
+    caption: 'A historic assembly of thousands of students, mentors, and trustees celebrating 20 years of unconditional love and service.',
     date: '20 Years of ANBU'
   },
   {
@@ -226,7 +226,7 @@ export const galleryMediaItems: GalleryMediaItem[] = [
     title: 'Green Roots Community Tree Plantation',
     category: 'Environment',
     image: '/images/community_environment.jpg',
-    caption: 'Volunteers and youth planting native tree saplings to cultivate ecological harmony and green village corridors.',
+    caption: 'Students and youth planting native tree saplings to cultivate ecological harmony and green village corridors.',
     date: 'Eco Renewal'
   }
 ];

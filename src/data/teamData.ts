@@ -14,7 +14,7 @@ export const teamMembers: TeamMember[] = [
     id: 'team-2',
     name: 'Director of Programs',
     role: 'Community Operations (Designated)',
-    bio: 'Specialist in grassroots curriculum development, volunteer network coordination, and participatory rural initiatives.',
+    bio: 'Specialist in grassroots curriculum development, academic mentorship coordination, and participatory rural initiatives.',
     isVerifiedPlaceholder: true
   },
   {

@@ -17,9 +17,9 @@ export const ContactForm: React.FC = () => {
 
   const categories = [
     'General Enquiry',
-    'Volunteering & Chapter Coordination',
-    'Donations & Transparency',
-    'CSR & Institutional Partnership',
+    'Scholarship & Student Support',
+    'Institutional & School Partnerships',
+    'CSR & Academic Collaboration',
     'Media & Story Submissions'
   ];
 

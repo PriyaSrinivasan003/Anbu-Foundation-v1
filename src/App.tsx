@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ScrollToTop } from './components/layout/ScrollToTop';
@@ -10,9 +10,6 @@ import { ProgramsPage } from './pages/ProgramsPage';
 import { ProgramDetailPage } from './pages/ProgramDetailPage';
 import { ImpactPage } from './pages/ImpactPage';
 import { StoriesPage } from './pages/StoriesPage';
-import { GetInvolvedPage } from './pages/GetInvolvedPage';
-import { VolunteerPage } from './pages/VolunteerPage';
-import { DonatePage } from './pages/DonatePage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -43,9 +40,9 @@ const AppContent: React.FC = () => {
           <Route path="/impact" element={<ImpactPage />} />
           <Route path="/success-stories" element={<ImpactPage />} />
           <Route path="/stories" element={<StoriesPage />} />
-          <Route path="/get-involved" element={<GetInvolvedPage />} />
-          <Route path="/volunteer" element={<VolunteerPage />} />
-          <Route path="/donate" element={<DonatePage />} />
+          <Route path="/get-involved" element={<Navigate to="/contact" replace />} />
+          <Route path="/volunteer" element={<Navigate to="/contact" replace />} />
+          <Route path="/donate" element={<Navigate to="/contact" replace />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -94,8 +94,6 @@ export const Navbar: React.FC = () => {
     { title: 'Our Story & 20 Years Journey', category: 'About Us', path: '/our-story' },
     { title: 'Thalapathy Vijay Civic Honor', category: 'Recognition', path: '/stories' },
     { title: '20 Years of ANBU Celebration', category: 'Anniversary Milestone', path: '/stories' },
-    { title: 'Volunteer Registration', category: 'Get Involved', path: '/volunteer' },
-    { title: 'Donate to ANBU Foundation', category: 'Donation', path: '/donate' },
     { title: 'Contact Office & Helpdesk', category: 'Contact', path: '/contact' }
   ];
 
@@ -593,7 +591,7 @@ export const Navbar: React.FC = () => {
                       Popular Searches
                     </span>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.65rem' }}>
-                      {['Scholarships', 'Bright Minds', 'Caring Hands', 'Vijay Award', 'Volunteer', 'Donate'].map(tag => (
+                      {['Scholarships', 'Inclusive Education', 'School Supporting', 'Vijay Award', 'Milestones'].map(tag => (
                         <button
                           key={tag}
                           type="button"
@@ -829,12 +827,12 @@ export const Navbar: React.FC = () => {
 
               <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <Link
-                  to="/volunteer"
+                  to="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="btn btn-primary"
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
-                  <span>Volunteer Registration</span>
+                  <span>Contact Office & Helpdesk</span>
                 </Link>
               </div>
             </div>
@@ -862,10 +860,7 @@ export const Navbar: React.FC = () => {
           background-color: rgba(244, 90, 36, 0.12) !important;
           color: var(--color-sunset-orange) !important;
         }
-        .navbar-donate-now-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(244, 90, 36, 0.5) !important;
-        }
+
         .search-result-item:hover {
           background-color: rgba(255, 208, 155, 0.4) !important;
         }

@@ -16,7 +16,7 @@ export const ImpactPage: React.FC = () => {
     document.title = 'Success Stories & Impact — ANBU Foundation';
   }, []);
 
-  const categories = ['All', 'Community', 'Education', 'Healthcare', 'Ecology'];
+  const categories = ['All', 'Education', 'Community'];
 
   const filteredMetrics = selectedCategory === 'All'
     ? impactMetrics
@@ -227,7 +227,7 @@ export const ImpactPage: React.FC = () => {
               {
                 metric: 'Direct',
                 title: 'Faculty & Student Mentorship',
-                description: 'Connecting university professors and student volunteers directly with grassroots government schools.'
+                description: 'Connecting university professors and student mentors directly with grassroots government schools.'
               }
             ].map((item, idx) => (
               <div

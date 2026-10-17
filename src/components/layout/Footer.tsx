@@ -130,7 +130,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Get Involved */}
+          {/* Column 3: Quick Access */}
           <div>
             <h4
               style={{
@@ -143,27 +143,27 @@ export const Footer: React.FC = () => {
                 marginBottom: '1.4rem'
               }}
             >
-              Get Involved
+              Quick Access
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <li>
-                <Link to="/volunteer" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
-                  Volunteer Registration
+                <Link to="/our-story" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
+                  Our Story & Leadership
                 </Link>
               </li>
               <li>
-                <Link to="/get-involved" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
-                  Partnership Opportunities
+                <Link to="/programs" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
+                  Key Community Initiatives
                 </Link>
               </li>
               <li>
-                <Link to="/donate" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
-                  Make a Contribution
+                <Link to="/impact" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
+                  Success Stories & Milestones
                 </Link>
               </li>
               <li>
                 <Link to="/contact" style={{ color: 'rgba(255, 244, 229, 0.82)' }}>
-                  Contact Information & FAQ
+                  Contact Information & Helpdesk
                 </Link>
               </li>
             </ul>
@@ -196,7 +196,7 @@ export const Footer: React.FC = () => {
               Community Dispatches
             </h4>
             <p style={{ color: 'rgba(255, 244, 229, 0.75)', fontSize: '0.92rem', marginBottom: '1.25rem' }}>
-              Receive monthly dispatches on grassroots stories, upcoming volunteer drives, and progress milestones.
+              Receive monthly dispatches on grassroots stories, community programs, and progress milestones.
             </p>
 
             {subscribed ? (

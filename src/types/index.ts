@@ -65,7 +65,7 @@ export interface ImpactMetric {
   suffix: string;
   label: string;
   description: string;
-  category: 'Community' | 'Education' | 'Healthcare' | 'Ecology';
+  category: 'Community' | 'Education' | string;
 }
 
 export interface Milestone {
@@ -88,7 +88,7 @@ export interface TeamMember {
 export interface FAQItem {
   question: string;
   answer: string;
-  category: 'General' | 'Donations' | 'Volunteering' | 'Transparency';
+  category: 'General' | 'Education' | 'Partnerships' | 'Community' | 'Programs' | string;
 }
 
 export interface VolunteerFormData {

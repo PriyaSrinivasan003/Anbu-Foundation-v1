@@ -7,23 +7,23 @@ export const faqsData: FAQItem[] = [
     category: 'General'
   },
   {
-    question: 'How are donations utilized and tracked?',
-    answer: 'We maintain strict financial transparency. Every contribution is allocated toward direct program activities (educational books, health checkup kits, saplings, and relief hampers). Annual audited statements will be made openly available for download on our Impact page.',
-    category: 'Donations'
+    question: 'How does ANBU Foundation support deserving students and scholars?',
+    answer: 'Through merit-cum-means scholarships, higher education degree sponsorships at Sathyabama Institute of Science and Technology, distribution of textbooks, accessible learning aids, and dedicated mentorship programs for first-generation college aspirants.',
+    category: 'Education'
   },
   {
-    question: 'Can I volunteer if I only have a few hours on weekends?',
-    answer: 'Absolutely! Our volunteer opportunities are intentionally designed around flexible commitments. You can lead a weekend reading circle, accompany a healthcare nurse for companionship visits, or assist with tree-planting and hamper distribution drives.',
-    category: 'Volunteering'
+    question: 'How can government or rural schools request educational support?',
+    answer: 'Government and rural schools in and around Chennai and Kanchipuram can connect with our Office directly. We collaborate on basic school amenities, smart classroom setups, library books, and sports or personality development workshops.',
+    category: 'Programs'
   },
   {
-    question: 'Is the current payment processing live?',
-    answer: 'The current website demonstrates the modular donation interface and pledge collection system. Live payment gateway processing (via Razorpay, Stripe, or direct bank transfer) will be linked with secure server-side webhook validation and tax exemption certificates upon backend deployment.',
-    category: 'Transparency'
+    question: 'What is the connection between ANBU Foundation and Sathyabama Institute of Science and Technology?',
+    answer: 'ANBU Foundation was founded under the visionary leadership of Sathyabama to drive institutional social responsibility, grassroots educational upliftment, and sustainable community empowerment across Tamil Nadu.',
+    category: 'General'
   },
   {
     question: 'How can our company or institution partner with ANBU Foundation?',
-    answer: 'We warmly welcome institutional collaborations, CSR initiatives, and academic partnerships. Please reach out through our Contact page or Get Involved portal, selecting "Institutional Partnership" as your inquiry category.',
-    category: 'General'
+    answer: 'We warmly welcome institutional collaborations, CSR initiatives, and academic partnerships. Please reach out through our Contact page selecting "CSR & Academic Collaboration" as your inquiry category.',
+    category: 'Partnerships'
   }
 ];

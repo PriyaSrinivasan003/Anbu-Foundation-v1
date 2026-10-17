@@ -19,7 +19,7 @@ export const ContactPage: React.FC = () => {
           <SectionHeader
             scriptEyebrow="Get in Touch"
             title="Let’s Converse & Collaborate"
-            subtitle="Whether you have questions regarding our programs, want to establish a local volunteer pod, or explore institutional CSR alignment, our team welcomes your voice."
+            subtitle="Whether you have questions regarding our programs, academic initiatives, or want to explore institutional CSR alignment, our team welcomes your voice."
             showOrnament={true}
           />
 
@@ -96,7 +96,7 @@ export const ContactPage: React.FC = () => {
                     </div>
                     <SocialMediaLinks variant="compact" />
                     <span style={{ display: 'block', marginTop: '0.65rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                      Stay updated with our grassroots stories, volunteer drives, and live announcements.
+                      Stay updated with our grassroots stories, community programs, and live announcements.
                     </span>
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <p style={{ margin: '0.75rem 0 0 0', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
-                  Located at Sathyabama University Campus, Rajiv Gandhi Salai (OMR), Chennai. Visitors and volunteers welcome during office hours.
+                  Located at Sathyabama University Campus, Rajiv Gandhi Salai (OMR), Chennai. Visitors and partners welcome during office hours.
                 </p>
               </div>
             </div>
@@ -190,7 +190,7 @@ export const ContactPage: React.FC = () => {
                   Connect Across Our Official Social Channels
                 </h3>
                 <p style={{ margin: '0.35rem 0 0 0', fontSize: '0.92rem', color: 'var(--text-secondary)' }}>
-                  Follow along for field updates, student empowerment spotlights, and volunteer drives.
+                  Follow along for field updates, student empowerment spotlights, and program milestones.
                 </p>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Heart, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { RippleHero } from '../shared/RippleHero';
 import { BotanicalIllustration } from '../shared/BotanicalIllustration';
 import { AnimatedTextLetters } from '../shared/AnimatedTextLetters';
@@ -497,7 +497,7 @@ export const HeroSection: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* CTA Buttons: Primary "Learn More" & Secondary "Make a warm donation" */}
+          {/* CTA Buttons: Primary "Learn More" & Secondary "Explore Key Initiatives" */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -506,7 +506,7 @@ export const HeroSection: React.FC = () => {
               display: 'flex',
               flexWrap: 'wrap',
               alignItems: 'center',
-              gap: '1rem'
+              gap: '1.25rem'
             }}
           >
             <div style={{ perspective: '900px' }}>
@@ -519,24 +519,15 @@ export const HeroSection: React.FC = () => {
               </Link>
             </div>
 
-            <Link
-              to="/donate"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                color: 'var(--color-golden-peach)',
-                marginLeft: '0.5rem',
-                fontWeight: 600,
-                fontSize: '0.98rem',
-                textDecoration: 'none'
-              }}
-            >
-              <Heart size={16} fill="var(--color-warm-coral)" color="var(--color-warm-coral)" />
-              <span style={{ textDecoration: 'underline', textUnderlineOffset: '4px' }}>
-                Make a warm donation
-              </span>
-            </Link>
+            <div style={{ perspective: '900px' }}>
+              <Link
+                to="/programs"
+                className="btn btn-primary btn-lg btn-3d-glow"
+                id="hero-explore-initiatives-btn"
+              >
+                <span>Explore Key Initiatives</span>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>

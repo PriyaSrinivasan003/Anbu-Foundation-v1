@@ -808,7 +808,7 @@ export const OurStoryPage: React.FC = () => {
                   Involvement in Execution
                 </h4>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.65, margin: 0 }}>
-                  True impact is experienced when we interlace with the lives of the people. Our leaders and volunteers walk on the ground, sharing joy and lifting lives hand in hand.
+                  True impact is experienced when we interlace with the lives of the people. Our leaders and team members walk on the ground, sharing joy and lifting lives hand in hand.
                 </p>
               </div>
             </div>

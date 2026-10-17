@@ -99,9 +99,9 @@ export const programsData: Program[] = [
       { label: 'Collaborations', value: 'Contemporary Service Orgs' }
     ],
     waysToParticipate: [
-      'Volunteer as an academic scribe or reader for visually impaired scholars',
+      'Support as an academic scribe or reader for visually impaired scholars',
       'Collaborate as a contemporary service organization to diverge help opportunities',
-      'Sponsor assistive learning devices, speech-to-text software, and mobility aids'
+      'Facilitate assistive learning devices, speech-to-text software, and mobility aids'
     ]
   },
   {
@@ -206,7 +206,7 @@ export const programsData: Program[] = [
     ],
     waysToParticipate: [
       'Register your school or institution for “My Saturday University”',
-      'Volunteer in weekend organic vegetable farming and soil care in Nallambakkam',
+      'Participate in weekend organic vegetable farming and soil care in Nallambakkam',
       'Partner in rural women empowerment and vocational toolkits'
     ]
   },
@@ -348,7 +348,7 @@ export const programsData: Program[] = [
       { label: 'National Mission Project', value: 'Sanctioned by NMEW' }
     ],
     waysToParticipate: [
-      'Sponsor a vocational toolkit or sewing machine for a newly certified graduate',
+      'Provide vocational toolkits or sewing machines for newly certified graduates',
       'Conduct expert guest training on digital marketing or micro-finance',
       'Partner in market linkages for products crafted by rural women collectives'
     ]

@@ -17,7 +17,7 @@ export const socialPlatforms: SocialPlatform[] = [
     url: 'https://instagram.com',
     brandColor: '#E1306C',
     hoverGradient: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-    description: 'Daily field stories, volunteer spotlights & photo updates',
+    description: 'Daily field stories, student spotlights & photo updates',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

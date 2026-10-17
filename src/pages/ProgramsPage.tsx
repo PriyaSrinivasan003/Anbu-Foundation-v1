@@ -1036,11 +1036,11 @@ export const ProgramsPage: React.FC = () => {
                           </span>
                           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                             <Link
-                              to="/donate"
+                              to={`/programs/${program.slug}`}
                               className="btn btn-primary btn-sm"
                               style={{ padding: '0.55rem 1.15rem' }}
                             >
-                              <span>Sponsor Beneficiary</span>
+                              <span>View Full Initiative</span>
                             </Link>
                             <Link
                               to={`/programs/${program.slug}`}
@@ -1249,23 +1249,22 @@ export const ProgramsPage: React.FC = () => {
             Empower Our Next 20 Years
           </span>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.1rem, 4vw, 3rem)', margin: '0 0 1.25rem 0', color: '#FFFFFF' }}>
-            Partner with ANBU Foundation Today
+            Collaborate with ANBU Foundation
           </h2>
           <p style={{ color: 'rgba(255, 244, 229, 0.85)', fontSize: '1.08rem', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-            Whether sponsoring a student’s four-year university tuition, adopting a government school classroom, or volunteering in rural empowerment camps, your engagement delivers direct, verified human impact.
+            Whether connecting for academic seat allotments, government school adoption programs, or grassroots rural empowerment, ANBU Foundation welcomes constructive institutional partnerships.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
             <div style={{ perspective: '900px' }}>
-              <Link to="/donate" className="btn btn-primary btn-lg btn-3d-glow" style={{ padding: '0.95rem 2.25rem' }}>
-                <Heart size={18} fill="#FFFFFF" />
-                <span>Contribute to Key Initiatives</span>
+              <Link to="/contact" className="btn btn-primary btn-lg btn-3d-glow" style={{ padding: '0.95rem 2.25rem' }}>
+                <span>Contact Our Office</span>
               </Link>
             </div>
             
             <div style={{ perspective: '900px' }}>
-              <Link to="/volunteer" className="btn btn-secondary btn-lg btn-3d-glow" style={{ padding: '0.95rem 2rem', backgroundColor: 'rgba(255,255,255,0.08)', color: '#FFFFFF', borderColor: 'rgba(255,208,155,0.35)' }}>
-                <span>Volunteer for Field Work</span>
+              <Link to="/our-story" className="btn btn-secondary btn-lg btn-3d-glow" style={{ padding: '0.95rem 2rem', backgroundColor: 'rgba(255,255,255,0.08)', color: '#FFFFFF', borderColor: 'rgba(255,208,155,0.35)' }}>
+                <span>Discover Our Story</span>
                 <ArrowRight size={18} />
               </Link>
             </div>
