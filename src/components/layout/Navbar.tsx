@@ -90,6 +90,7 @@ export const Navbar: React.FC = () => {
     { title: 'RURAL DEVELOPMENT', category: 'Initiative', path: '/programs/rural-development' },
     { title: 'JOY OF GIVING', category: 'Initiative', path: '/programs/joy-of-giving' },
     { title: 'SKILL DEVELOPMENT', category: 'Initiative', path: '/programs/skill-development' },
+    { title: 'Success Stories', category: 'Beneficiaries & Impact', path: '/impact' },
     { title: 'Our Story & 20 Years Journey', category: 'About Us', path: '/our-story' },
     { title: 'Thalapathy Vijay Civic Honor', category: 'Recognition', path: '/stories' },
     { title: '20 Years of ANBU Celebration', category: 'Anniversary Milestone', path: '/stories' },
@@ -365,7 +366,7 @@ export const Navbar: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* 4. Events */}
+            {/* 4. Success Stories */}
             <NavLink
               to="/impact"
               className="navbar-nav-link"
@@ -373,7 +374,7 @@ export const Navbar: React.FC = () => {
             >
               {({ isActive }) => (
                 <>
-                  <span>Events</span>
+                  <span>Success Stories</span>
                   {isActive && (
                     <motion.span
                       layoutId="navActiveLine"
@@ -556,7 +557,7 @@ export const Navbar: React.FC = () => {
                 <input
                   ref={searchInputRef}
                   type="text"
-                  placeholder="Search causes, scholarships, stories, or events..."
+                  placeholder="Search causes, scholarships, success stories..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{
@@ -797,7 +798,7 @@ export const Navbar: React.FC = () => {
                   padding: '0.4rem 0'
                 })}
               >
-                Events
+                Success Stories
               </NavLink>
 
               <NavLink

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, HeartPulse, TreePine, Users, Home, Sparkles } from 'lucide-react';
+import { ArrowRight, BookOpen, HeartPulse, TreePine, Users, Home } from 'lucide-react';
 import { AnimatedImage } from '../shared/AnimatedImage';
 import type { Program } from '../../types';
 
@@ -9,7 +9,7 @@ interface ProgramCardProps {
 }
 
 export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
-  const [isTrayActive, setIsTrayActive] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -23,9 +23,9 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Active': return { bg: 'rgba(39, 174, 96, 0.15)', text: '#196F3D', border: 'rgba(39, 174, 96, 0.3)' };
-      case 'Expanding': return { bg: 'rgba(244, 90, 36, 0.15)', text: '#C0392B', border: 'rgba(244, 90, 36, 0.3)' };
-      default: return { bg: 'rgba(255, 208, 155, 0.3)', text: '#8C4724', border: 'rgba(255, 208, 155, 0.5)' };
+      case 'Active': return { bg: 'rgba(39, 174, 96, 0.22)', text: '#2ecc71', border: 'rgba(39, 174, 96, 0.45)' };
+      case 'Expanding': return { bg: 'rgba(244, 90, 36, 0.25)', text: '#ff7675', border: 'rgba(244, 90, 36, 0.45)' };
+      default: return { bg: 'rgba(255, 208, 155, 0.25)', text: '#f39c12', border: 'rgba(255, 208, 155, 0.45)' };
     }
   };
 
@@ -33,49 +33,90 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
 
   return (
     <div
-      className={`bnr-service-card group preserve-3d ${isTrayActive ? 'is-active' : ''}`}
-      onMouseEnter={() => setIsTrayActive(true)}
-      onMouseLeave={() => setIsTrayActive(false)}
+      className={`bnr-service-card group preserve-3d ${isHovered ? 'is-active' : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setIsHovered(!isHovered)}
       style={{
         perspective: '1200px',
-        marginBottom: isTrayActive ? '2.5rem' : '0',
-        transition: 'margin-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+        position: 'relative',
+        height: '460px',
+        borderRadius: 'var(--radius-2xl)',
+        cursor: 'pointer'
       }}
     >
-      {/* 1. Radial Blur Glow on Hover (BNR signature) */}
+      {/* 1. Radial Blur Glow on Hover */}
       <div className="bnr-service-glow" aria-hidden="true" />
 
-      {/* 2. Main Elevated 3D Card */}
+      {/* 2. Main Card Housing */}
       <div
         className="warm-card preserve-3d"
         style={{
           position: 'relative',
-          zIndex: 5,
-          display: 'flex',
-          flexDirection: 'column',
+          width: '100%',
+          height: '100%',
           overflow: 'hidden',
-          borderRadius: 'var(--radius-xl)',
-          backgroundColor: '#FFFFFF',
-          border: '1.5px solid rgba(244, 90, 36, 0.18)',
-          boxShadow: isTrayActive
-            ? '0 16px 36px -6px rgba(244, 90, 36, 0.22), 0 6px 16px rgba(43, 22, 15, 0.06)'
-            : '0 8px 24px -4px rgba(43, 22, 15, 0.08)',
-          transition: 'all 0.38s cubic-bezier(0.16, 1, 0.3, 1)'
+          borderRadius: 'var(--radius-2xl)',
+          backgroundColor: '#1E0E08',
+          border: '1.5px solid rgba(244, 90, 36, 0.22)',
+          boxShadow: isHovered
+            ? '0 20px 42px -8px rgba(244, 90, 36, 0.32), 0 10px 24px rgba(43, 22, 15, 0.2)'
+            : '0 10px 28px -4px rgba(43, 22, 15, 0.1)',
+          transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+          transform: isHovered ? 'translateY(-6px)' : 'translateY(0)'
         }}
       >
-        {/* Card Header with Category, Title, and Expanding Accent Underline (BNR signature) */}
-        <div style={{ padding: '1.5rem 1.75rem 1.25rem 1.75rem', backgroundColor: 'var(--color-sunset-cream)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+        {/* Full-Bleed Image: Always filling the card, exclusively visible in resting state */}
+        <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
+          <AnimatedImage
+            src={program.coverImage}
+            alt={program.title}
+            containerStyle={{ width: '100%', height: '100%' }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+              transition: 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)'
+            }}
+          />
+        </div>
+
+        {/* Hover Content Overlay: Rich glassmorphism overlay that appears only while hovered */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 10,
+            background: 'linear-gradient(180deg, rgba(30, 14, 8, 0.5) 0%, rgba(30, 14, 8, 0.88) 36%, rgba(30, 14, 8, 0.98) 100%)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            opacity: isHovered ? 1 : 0,
+            pointerEvents: isHovered ? 'auto' : 'none',
+            padding: '1.75rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            transform: isHovered ? 'translateY(0)' : 'translateY(18px)',
+            transition: 'opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}
+        >
+          {/* Top Row: Category and Status Pill */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.4rem',
-                fontSize: '0.72rem',
+                gap: '0.45rem',
+                fontSize: '0.74rem',
                 fontWeight: 700,
-                letterSpacing: '0.14em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'var(--color-sunset-orange)'
+                color: 'var(--color-golden-peach)',
+                backgroundColor: 'rgba(255, 208, 155, 0.15)',
+                padding: '0.35rem 0.75rem',
+                borderRadius: 'var(--radius-full)',
+                border: '1px solid rgba(255, 208, 155, 0.28)'
               }}
             >
               {getCategoryIcon(program.category)}
@@ -86,8 +127,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.3rem',
-                padding: '0.2rem 0.65rem',
+                gap: '0.35rem',
+                padding: '0.3rem 0.75rem',
                 borderRadius: 'var(--radius-full)',
                 fontSize: '0.72rem',
                 fontWeight: 700,
@@ -103,147 +144,98 @@ export const ProgramCard: React.FC<ProgramCardProps> = ({ program }) => {
             </span>
           </div>
 
-          <h3
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: '1.35rem',
-              color: 'var(--color-sunset-dark)',
-              lineHeight: 1.25,
-              margin: '0 0 0.5rem 0'
-            }}
-          >
-            {program.title}
-          </h3>
-
-          {/* BNR-style expanding accent underline on hover */}
-          <span className="accent-expand-line" />
-        </div>
-
-        {/* Cover Image with Loading Shimmer Skeleton */}
-        <div style={{ position: 'relative', height: '200px', overflow: 'hidden', backgroundColor: 'var(--color-sunset-cream)' }}>
-          <AnimatedImage
-            src={program.coverImage}
-            alt={program.title}
-            containerStyle={{ height: '200px', width: '100%' }}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              transform: isTrayActive ? 'scale(1.06)' : 'scale(1)',
-              transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(43, 22, 15, 0.05) 0%, rgba(43, 22, 15, 0.5) 100%)'
-            }}
-          />
-          <div style={{ position: 'absolute', bottom: '0.75rem', left: '1.25rem', right: '1.25rem' }}>
-            <span className="font-script" style={{ color: 'var(--color-golden-peach)', fontSize: '1.25rem', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>
-              {program.tagline}
-            </span>
-          </div>
-        </div>
-
-        {/* Card Body */}
-        <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-          <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
-            {program.shortDescription}
-          </p>
-
-          {/* Key Metric Snapshot */}
-          {program.metrics && program.metrics[0] && (
-            <div
+          {/* Middle/Bottom Information */}
+          <div>
+            <h3
               style={{
-                padding: '0.65rem 0.9rem',
-                backgroundColor: 'rgba(255, 244, 229, 0.7)',
-                borderRadius: 'var(--radius-md)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '1rem',
-                border: '1px solid rgba(244, 90, 36, 0.12)'
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1.5rem',
+                color: '#FFFFFF',
+                lineHeight: 1.25,
+                margin: '0 0 0.45rem 0'
               }}
             >
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
-                {program.metrics[0].label}
-              </span>
-              <span style={{ fontSize: '0.92rem', color: 'var(--color-sunset-orange)', fontWeight: 800 }}>
-                {program.metrics[0].value}
-              </span>
-            </div>
-          )}
+              {program.title}
+            </h3>
 
-          {/* Footer Action */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.75rem', borderTop: '1px solid var(--border-light)' }}>
+            {program.tagline && (
+              <p
+                style={{
+                  fontFamily: 'var(--font-script, cursive)',
+                  color: 'var(--color-golden-peach)',
+                  fontSize: '1.1rem',
+                  lineHeight: 1.35,
+                  margin: '0 0 0.75rem 0',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden'
+                }}
+              >
+                "{program.tagline}"
+              </p>
+            )}
+
+            <p
+              style={{
+                fontSize: '0.88rem',
+                color: 'rgba(255, 244, 229, 0.88)',
+                lineHeight: 1.55,
+                margin: '0 0 1rem 0',
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden'
+              }}
+            >
+              {program.shortDescription}
+            </p>
+
+            {/* Key Metric Snapshot */}
+            {program.metrics && program.metrics[0] && (
+              <div
+                style={{
+                  padding: '0.55rem 0.85rem',
+                  backgroundColor: 'rgba(244, 90, 36, 0.22)',
+                  borderRadius: 'var(--radius-md)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '1rem',
+                  border: '1px solid rgba(255, 208, 155, 0.25)'
+                }}
+              >
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255, 244, 229, 0.85)', fontWeight: 600 }}>
+                  {program.metrics[0].label}
+                </span>
+                <span style={{ fontSize: '0.88rem', color: 'var(--color-golden-peach)', fontWeight: 800 }}>
+                  {program.metrics[0].value}
+                </span>
+              </div>
+            )}
+
+            {/* Direct Action Link */}
             <Link
               to={`/programs/${program.slug}`}
+              className="btn btn-primary"
               style={{
+                width: '100%',
                 display: 'inline-flex',
+                justifyContent: 'center',
                 alignItems: 'center',
-                gap: '0.4rem',
+                gap: '0.5rem',
+                padding: '0.65rem 1.25rem',
+                fontSize: '0.88rem',
                 fontWeight: 700,
-                fontSize: '0.9rem',
-                color: 'var(--color-sunset-orange)',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                borderRadius: 'var(--radius-full)'
               }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <span>Explore Details</span>
+              <span>Explore Initiative</span>
               <ArrowRight size={15} />
             </Link>
-
-            <button
-              type="button"
-              onClick={() => setIsTrayActive(!isTrayActive)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--color-muted-rose)',
-                fontSize: '0.8rem',
-                fontWeight: 600
-              }}
-            >
-              {isTrayActive ? 'Close Quick View ↑' : 'Quick Preview ↓'}
-            </button>
           </div>
-        </div>
-      </div>
-
-      {/* 3. BNR-style Sliding Drawer / Tray Underneath Card */}
-      <div
-        className={`bnr-card-tray ${isTrayActive ? 'bnr-card-tray-open' : 'bnr-card-tray-closed'}`}
-        aria-hidden={!isTrayActive}
-      >
-        <div
-          style={{
-            backgroundColor: 'var(--color-sunset-cream)',
-            border: '1.5px solid rgba(244, 90, 36, 0.25)',
-            borderTop: 'none',
-            borderRadius: '0 0 var(--radius-xl) var(--radius-xl)',
-            padding: '1.25rem 1.5rem',
-            boxShadow: '0 12px 24px -6px rgba(43, 22, 15, 0.12)'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.4rem' }}>
-            <Sparkles size={14} color="var(--color-sunset-orange)" />
-            <strong style={{ fontSize: '0.82rem', color: 'var(--color-sunset-dark)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Beneficiary Reach
-            </strong>
-          </div>
-          <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: '0 0 0.85rem 0' }}>
-            {program.intendedBeneficiaries}
-          </p>
-          <Link
-            to={`/programs/${program.slug}`}
-            className="btn btn-primary btn-sm"
-            style={{ width: '100%', fontSize: '0.82rem', padding: '0.5rem 1rem' }}
-          >
-            <span>Open Dedicated Program Page</span>
-            <ArrowRight size={14} />
-          </Link>
         </div>
       </div>
     </div>

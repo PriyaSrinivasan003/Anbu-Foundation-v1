@@ -114,7 +114,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/impact" style={{ color: 'rgba(255, 244, 229, 0.82)', transition: 'color 0.2s' }}>
-                  Target Impact Dashboard
+                  Success Stories & Impact
                 </Link>
               </li>
               <li>

@@ -41,6 +41,7 @@ const AppContent: React.FC = () => {
           <Route path="/initiatives" element={<ProgramsPage />} />
           <Route path="/initiatives/:slug" element={<ProgramDetailPage />} />
           <Route path="/impact" element={<ImpactPage />} />
+          <Route path="/success-stories" element={<ImpactPage />} />
           <Route path="/stories" element={<StoriesPage />} />
           <Route path="/get-involved" element={<GetInvolvedPage />} />
           <Route path="/volunteer" element={<VolunteerPage />} />

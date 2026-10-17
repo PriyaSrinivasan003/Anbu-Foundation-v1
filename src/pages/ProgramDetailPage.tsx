@@ -572,15 +572,15 @@ export const ProgramDetailPage: React.FC = () => {
                   backgroundColor: '#FFFFFF'
                 }}
               >
-                <div style={{ position: 'relative', width: '100%', height: '360px', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', width: '100%', height: '380px', overflow: 'hidden' }}>
                   <AnimatedImage
                     src={program.coverImage}
                     alt={program.title}
                     loading="eager"
-                    containerStyle={{ width: '100%', height: '360px' }}
+                    containerStyle={{ width: '100%', height: '380px' }}
                     style={{
                       width: '100%',
-                      height: '360px',
+                      height: '380px',
                       objectFit: 'cover',
                       display: 'block'
                     }}
@@ -602,25 +602,6 @@ export const ProgramDetailPage: React.FC = () => {
                   >
                     {program.category}
                   </div>
-                </div>
-                
-                {/* Official University Seal Card Docked Below Image */}
-                <div
-                  style={{
-                    backgroundColor: 'rgba(255, 251, 246, 0.98)',
-                    padding: '1.25rem 1.5rem',
-                    borderTop: '1px solid rgba(244, 90, 36, 0.15)'
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                    <ShieldCheck size={18} color="var(--color-sunset-orange)" />
-                    <strong style={{ fontSize: '0.94rem', color: 'var(--color-sunset-dark)' }}>
-                      Institutional University Platform
-                    </strong>
-                  </div>
-                  <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-                    Executed directly via Sathyabama Institute of Science and Technology campus facilities & grassroots verification channels.
-                  </p>
                 </div>
               </div>
 

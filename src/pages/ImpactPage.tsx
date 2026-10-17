@@ -5,16 +5,15 @@ import { SuccessStoriesDeck } from '../components/impact/SuccessStoriesDeck';
 import { impactMetrics, DEMO_IMPACT_NOTE } from '../data/impactData';
 import { 
   FileText, 
-  Download, 
-  MapPin, 
-  ShieldCheck
+  Download,
+  ShieldCheck 
 } from 'lucide-react';
 
 export const ImpactPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   useEffect(() => {
-    document.title = 'Our Impact — ANBU Foundation';
+    document.title = 'Success Stories & Impact — ANBU Foundation';
   }, []);
 
   const categories = ['All', 'Community', 'Education', 'Healthcare', 'Ecology'];
@@ -153,107 +152,136 @@ export const ImpactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Interactive Project Map Visualization (Designated Pilot Locations) */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--bg-surface-warm)' }}>
+      {/* Documented Institutional Milestones */}
+      <section className="section-padding" style={{ backgroundColor: 'var(--bg-surface-warm)', textAlign: 'center' }}>
         <div className="container">
-          <SectionHeader
-            badge="Geographic Reach"
-            title="Designated Regional Pilot Chapters"
-            subtitle="A preview of community hubs and target operational zones where pilot programs are underway."
-          />
-
-          <div
-            className="warm-card"
-            style={{
-              padding: 'clamp(2rem, 4vw, 3rem)',
-              backgroundColor: 'var(--color-white)',
-              borderRadius: 'var(--radius-xl)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '2.5rem',
-              alignItems: 'center'
-            }}
-          >
-            <div>
-              <span className="badge-tag" style={{ marginBottom: '1rem' }}>
-                Spatial Planning
-              </span>
-              <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: 'var(--color-sunset-dark)' }}>
-                Decentralized Community Hubs
-              </h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-                We believe that centralized aid often misses hyper-local nuances. ANBU Foundation structures operations through modular community pods located directly within walking distance of participating families.
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                {[
-                  { name: 'Pod Alpha — Riverside Valley', desc: 'Focus on outdoor reading circles and primary elder screening.' },
-                  { name: 'Pod Beta — Sunny Vale Hamlet', desc: 'Dedicated community canopy, composting, and micro-nursery.' },
-                  { name: 'Pod Gamma — Hillside Rural Sector', desc: 'Clean water biosand stations and solar path lighting.' }
-                ].map((pod, idx) => (
-                  <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                    <MapPin size={20} color="var(--color-sunset-orange)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <div>
-                      <strong style={{ display: 'block', fontSize: '0.95rem' }}>{pod.name}</strong>
-                      <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{pod.desc}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Stylized Map Vector Visual */}
-            <div
+          <div style={{ maxWidth: '800px', margin: '0 auto 3rem auto' }}>
+            <span
               style={{
-                position: 'relative',
-                minHeight: '320px',
-                backgroundColor: 'var(--color-sunset-cream)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1.5px solid rgba(244, 90, 36, 0.2)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '2rem',
-                textAlign: 'center',
-                overflow: 'hidden'
+                display: 'inline-block',
+                padding: '0.35rem 1.15rem',
+                backgroundColor: '#1E293B',
+                color: '#FFFFFF',
+                borderRadius: '9999px',
+                fontSize: '0.74rem',
+                fontWeight: 800,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                marginBottom: '1rem'
               }}
             >
-              {/* Decorative grid pattern */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage: 'radial-gradient(rgba(244, 90, 36, 0.2) 1.5px, transparent 1.5px)',
-                  backgroundSize: '24px 24px',
-                  opacity: 0.6
-                }}
-              />
+              VERIFIED OUTCOMES
+            </span>
+            <h2
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(2rem, 3.5vw, 2.75rem)',
+                color: 'var(--color-sunset-dark)',
+                fontWeight: 700,
+                lineHeight: 1.25,
+                margin: '0 0 0.75rem 0'
+              }}
+            >
+              Documented Institutional Milestones
+            </h2>
+            <div
+              style={{
+                width: '40px',
+                height: '2px',
+                backgroundColor: '#1E293B',
+                margin: '0.75rem auto 1rem auto',
+                borderRadius: '2px'
+              }}
+            />
+            <p
+              style={{
+                fontSize: '1rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.6,
+                margin: 0
+              }}
+            >
+              Authentic commitments tracked through our partner centers and academic reviews.
+            </p>
+          </div>
 
-              {/* Pin markers */}
-              <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          {/* 3 Milestone Cards */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '2rem'
+            }}
+          >
+            {[
+              {
+                metric: '100%',
+                title: 'Free Educational Aid',
+                description: 'Tuition and learning support delivered without any hidden charges or processing fees for approved candidates.'
+              },
+              {
+                metric: '18+',
+                title: 'Years of Sustained Service',
+                description: 'Continuous community engagement and student sponsorship since the inception of the foundation in 2006.'
+              },
+              {
+                metric: 'Direct',
+                title: 'Faculty & Student Mentorship',
+                description: 'Connecting university professors and student volunteers directly with grassroots government schools.'
+              }
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="warm-card"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: 'var(--radius-xl)',
+                  padding: '3rem 2.25rem',
+                  textAlign: 'center',
+                  boxShadow: '0 10px 30px rgba(43, 22, 15, 0.05)',
+                  border: '1.5px solid rgba(244, 90, 36, 0.12)',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
                 <div
                   style={{
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--color-sunset-orange)',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '1rem',
-                    boxShadow: '0 8px 24px rgba(244, 90, 36, 0.35)'
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: 'clamp(2.5rem, 3.8vw, 3.3rem)',
+                    fontWeight: 800,
+                    color: 'var(--color-sunset-dark)',
+                    lineHeight: 1,
+                    marginBottom: '1rem'
                   }}
                 >
-                  <MapPin size={32} />
+                  {item.metric}
                 </div>
-                <h4 style={{ fontSize: '1.25rem', marginBottom: '0.35rem' }}>Verified Pilot Zones</h4>
-                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', maxWidth: '300px' }}>
-                  Interactive geographic GPS maps will be linked once regional regulatory clearances are completed.
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    color: 'var(--color-sunset-dark)',
+                    marginBottom: '0.85rem'
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.92rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.65,
+                    margin: 0
+                  }}
+                >
+                  {item.description}
                 </p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

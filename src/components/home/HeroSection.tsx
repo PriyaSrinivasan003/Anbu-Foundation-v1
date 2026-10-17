@@ -9,6 +9,18 @@ import { OrnamentalDivider } from '../shared/OrnamentalDivider';
 
 const heroSlides = [
   {
+    url: '/images/hero_mou_ceremony.jpg',
+    position: 'center 30%',
+    title: 'ANBU Foundation Leadership & Academic Alliance',
+    filter: 'brightness(0.86) contrast(1.1) saturate(1.12)'
+  },
+  {
+    url: '/images/hero_scholars_assembly.jpg',
+    position: 'center 25%',
+    title: 'Dr. Mariazeena Johnson with Scholars & Faculty',
+    filter: 'brightness(0.86) contrast(1.1) saturate(1.12)'
+  },
+  {
     url: '/images/sunset_hero.jpg',
     position: 'center 38%',
     title: 'ANBU Sunset Spirit & Community Care',
