@@ -4,10 +4,7 @@ import { IntroSection } from '../components/home/IntroSection';
 import { ProgramExplorer } from '../components/home/ProgramExplorer';
 import { FeaturedStory } from '../components/home/FeaturedStory';
 import { ImpactPreview } from '../components/home/ImpactPreview';
-import { JourneyTimeline } from '../components/home/JourneyTimeline';
 import { CommunityGallery } from '../components/home/CommunityGallery';
-import { VolunteerBanner } from '../components/home/VolunteerBanner';
-import { LatestUpdates } from '../components/home/LatestUpdates';
 import { FinalCTA } from '../components/home/FinalCTA';
 
 export const HomePage: React.FC = () => {
@@ -32,19 +29,10 @@ export const HomePage: React.FC = () => {
       {/* 5. Interactive Impact Preview */}
       <ImpactPreview />
 
-      {/* 6. Project Journey Timeline */}
-      <JourneyTimeline />
-
-      {/* 7. Community Gallery */}
+      {/* 6. Community Gallery */}
       <CommunityGallery />
 
-      {/* 8. Volunteer and Donation Section */}
-      <VolunteerBanner />
-
-      {/* 9. Latest Updates or Events */}
-      <LatestUpdates />
-
-      {/* 10. Final Call to Action */}
+      {/* 8. Final Call to Action */}
       <FinalCTA />
     </main>
   );
